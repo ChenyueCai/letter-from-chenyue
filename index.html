@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Leave a Message</title>
+
+    <!-- Font: Cormorant Garamond throughout. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Fluid simulation base styles (canvas sizing, cover image, modal chrome) -->
+    <link rel="stylesheet" type="text/css" href="assets/fluid/fluid-base.css" />
+    <link rel="stylesheet" type="text/css" href="assets/fluid/micromodal.css" />
+    <!-- Page styles (overlay, intro text, form) -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <!-- Live fluid-simulation background. The bundle renders into this canvas. -->
+    <canvas id="glcanvas"></canvas>
+    <img id="coverImg" />
+
+    <!-- Foreground content. Wrapper ignores pointer events so drags on empty
+         space still stir the fluid; the card re-enables them for the form. -->
+    <div id="overlay">
+      <main class="card">
+        <header class="intro">
+          <h1>a letter from chenyue.c 2026</h1>
+          <p>
+            As Chenyue turned 25 last year, she received letters from 15
+            cities worldwide &mdash; from friends who, in one way or another, shaped the
+            trajectory of her life. Now, as Chenyue turns 26 this year, she wants
+            to write back into the world. If you would like a letter of life
+            updates from her, leave your mailing address, and she will send you a
+            handmade postcard. You are welcome to leave a note for what
+            you&rsquo;d like in the letter &mdash; a question, reflections on a
+            certain topic, a memory, advice, or simply a birthday message.
+          </p>
+          <p class="closing">
+            In a time of disappearing distances, perhaps letters are still a way
+            of saying: I thought of you, and wished to leave something that could
+            be held.
+          </p>
+        </header>
+
+        <!-- Formspree: replace YOUR_FORM_ID with your real endpoint id. -->
+        <form
+          id="messageForm"
+          action="https://formspree.io/f/mwvjlbkk"
+          method="POST"
+        >
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+
+          <label>
+            <span>Mailing Address</span>
+            <input
+              type="text"
+              name="address"
+              autocomplete="street-address"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Note <em>(optional)</em></span>
+            <textarea name="message" rows="1"></textarea>
+          </label>
+
+          <button type="submit">Send</button>
+          <p id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </main>
+    </div>
+
+    <!-- Hidden error modal used by the fluid bundle if WebGL is unavailable. -->
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true">
+          <header class="modal__header">
+            <h2 class="modal__title">Unsupported Device</h2>
+            <button
+              class="modal__close"
+              aria-label="Close modal"
+              data-micromodal-close
+            ></button>
+          </header>
+          <main class="modal__content">
+            <p>
+              This device/browser does not support some GPU functions required
+              by the background animation. Try desktop Chrome or Firefox.
+            </p>
+            <p id="glErrorMsg"></p>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fluid simulation bundle. -->
+    <script src="assets/fluid/main.js"></script>
+    <!-- Form submission handling (AJAX to Formspree). -->
+    <script src="form.js"></script>
+  </body>
+</html>
