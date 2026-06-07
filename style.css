@@ -203,3 +203,45 @@
 #formStatus.error {
   color: #c70076;
 }
+
+/* ------------------------------------------------------------------
+   Mobile / small screens. The fluid base CSS locks the page to
+   overflow:hidden; on a tall phone the card can exceed the viewport
+   and clip the Send button. The canvas is position:fixed, so we can
+   safely let the page scroll while it stays as the background.
+   ------------------------------------------------------------------ */
+@media (max-width: 640px) {
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #glcanvas {
+    position: fixed;
+  }
+
+  #overlay {
+    align-items: flex-start;
+    padding: 22px 14px;
+  }
+
+  .card {
+    padding: 26px 22px;
+    border-radius: 16px;
+  }
+
+  .intro h1 {
+    font-size: 30px;
+  }
+
+  .intro p {
+    font-size: 15px;
+  }
+
+  .intro .closing,
+  .intro .aside {
+    font-size: 14px;
+  }
+}
