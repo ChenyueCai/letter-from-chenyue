@@ -232,9 +232,9 @@
      vertically when it fits, but collapses safely (no clipping) if it ever
      overflows a very short screen. */
   .card {
-    max-width: 340px;
+    max-width: 300px;
     margin: auto;
-    padding: 18px 18px;
+    padding: 16px 16px;
     border-radius: 14px;
   }
 
